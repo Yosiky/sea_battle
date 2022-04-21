@@ -6,12 +6,11 @@
 /*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:45:45 by eestelle          #+#    #+#             */
-/*   Updated: 2022/04/21 19:19:15 by eestelle         ###   ########.fr       */
+/*   Updated: 2022/04/21 19:51:01 by eestelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sea_battle.h"
-#include <stdio.h>
 
 void	help(void)
 {
@@ -122,6 +121,7 @@ int	main(int argc, char **argv)
 			fd = 1;
 		generate(arr);
 		print(arr, fd);
+		close(fd);
 	}
 	else
 		help();

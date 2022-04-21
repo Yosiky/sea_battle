@@ -9,7 +9,10 @@ OBJ		=	$(addprefix $(DIR_OBJ)/,$(SRC:=.o))
 
 NAME	=	sea_battle
 
-.PHONY:	$(NAME) $(DIR_OBJ) all clean fclean re
+.PHONY:	all clean fclean re
+
+all:	$(DIR_OBJ)
+	$(MAKE) -j $(NAME)
 
 $(DIR_OBJ)/%.o: $(DIR_SRC)/%.c
 	$(CC) $< -c -o $@
@@ -19,9 +22,6 @@ $(NAME):	$(OBJ)
 
 $(DIR_OBJ):
 	mkdir -p $@
-
-all:	$(DIR_OBJ)
-	$(MAKE) -j $(NAME)
 
 clean:
 	rm -rf $(OBJ)
