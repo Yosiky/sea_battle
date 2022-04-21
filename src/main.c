@@ -6,7 +6,7 @@
 /*   By: eestelle </var/spool/mail/eestelle>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:45:45 by eestelle          #+#    #+#             */
-/*   Updated: 2022/04/21 19:15:14 by eestelle         ###   ########.fr       */
+/*   Updated: 2022/04/21 19:19:15 by eestelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ uint32_t	generate_ship(int l)
 	uint32_t	x = rand() % (z == 0 ? 10 - l : 10);
 	uint32_t	y = rand() % (z == 1 ? 10 - l : 10);
 
-	printf("x = %d, y = %d, z = %d\n", x, y, z);
-	printf("xyz = %d\n", ((x << 16) + (y << 8) + (z & 1)));
 	return ((x << 16) + (y << 8) + (z & 1));
 }
 
@@ -59,11 +57,9 @@ int		check(char arr[10][10], int l, uint32_t xyz)
 	int	y = (xyz & 0x0000ff00) >> 8;
 	int	z = xyz & 1;
 
-	printf("xyz = %d\n", xyz);
-	printf("x = %d, y = %d, z = %d\n", x, y, z);
 	if (z)
 	{
-		for (int i = l + 1; i >= 0; --i)
+		for (int i = l; i > -2; --i)
 		{
 			if (y + i == 10 || y + i == -1)
 				continue ;
@@ -80,7 +76,7 @@ int		check(char arr[10][10], int l, uint32_t xyz)
 	}
 	else
 	{
-		for (int i = l + 1; i >= 0; --i)
+		for (int i = l; i > -2; --i)
 		{
 			if (x + i == 10 || x + i == -1)
 				continue ;
@@ -103,13 +99,12 @@ void	generate(char arr[10][10])
 	char	flag;
 
 	while (check(arr, 4, generate_ship(4))) ;
-	/*for (int i = 0; i < 2; ++i)
+	for (int i = 0; i < 2; ++i)
 		while (check(arr, 3, generate_ship(3))) ;
 	for (int i = 0; i < 3; ++i)
 		while (check(arr, 2, generate_ship(2))) ;
 	for (int i = 0; i < 4; ++i)
 		while (check(arr, 1, generate_ship(1))) ;
-*/
 }
 
 int	main(int argc, char **argv)
